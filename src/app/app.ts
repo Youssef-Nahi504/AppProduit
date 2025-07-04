@@ -4,7 +4,7 @@ import { Produit } from './produit/produit';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Produit],
+  imports: [RouterOutlet,],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

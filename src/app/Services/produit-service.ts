@@ -9,7 +9,7 @@ import { catchError } from 'rxjs';
 export class ProduitService  {
 
    http = inject(HttpClient);
-   
+
    getProduits(){
     const Url = "http://localhost:8080/api/products";
     return this.http.get<Array<produit>>(Url);
