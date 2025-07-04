@@ -24,6 +24,7 @@ export class Produit implements OnInit {
       }
       )
     ).subscribe((prod) => {
+      console.log('Réponse reçue:', prod);
       this.ListeProduit.set(prod);
     })
   }
