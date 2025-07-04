@@ -1,30 +1,18 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { produit } from '../Models/model-produit/model-produit-module';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService  {
-  constructor() { }
 
-   ListeProduit : Array<produit> = [
-    {
-      id: 0,
-      nom: 'labubu',
-      description:'tres bonne qualite',
-      prix: 18
-    },
-    {
-      id: 1,
-      nom: 'kawachou',
-      description:'tres bonne qualite',
-      prix: 15
-    },
-    {
-      id: 2,
-      nom: 'papicha',
-      description:'tres bonne qualite',
-      prix: 11
-    }
-   ];
+   http = inject(HttpClient);
+   
+   getProduits(){
+    const Url = "http://localhost:8080/api/products";
+    return this.http.get<Array<produit>>(Url);
+   }
+
 }

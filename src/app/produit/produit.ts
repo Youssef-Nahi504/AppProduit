@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ProduitService } from '../Services/produit-service';
 import { produit } from '../Models/model-produit/model-produit-module';
 import { signal } from '@angular/core';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-produit',
@@ -9,13 +10,21 @@ import { signal } from '@angular/core';
   templateUrl: './produit.html',
   styleUrl: './produit.css'
 })
-export class Produit implements OnInit{
+export class Produit implements OnInit {
 
   produitService = inject(ProduitService);
   ListeProduit = signal<Array<produit>>([]);
 
   ngOnInit(): void {
-      this.ListeProduit.set(this.produitService.ListeProduit)
+    this.produitService.getProduits().pipe(
+      catchError((err) => {
+        console.log(err);
+        throw err;
+      }
+      )
+    ).subscribe((prod) => {
+      this.ListeProduit.set(prod);
+    })
   }
 
 }
